@@ -6,13 +6,32 @@ import json
 from flask.ext.autoindex import AutoIndex
 from lib_master_python import ds_recipe_lib
 import py_010_webhook_lib
-
+import PyPDF2
+from gensim.summarization.summarizer import summarize
+from xml.etree import ElementTree
 
 ds_user_email = "tvdesai@eng.ucsd.edu"
 ds_user_pw = "abcd@12345"
 ds_integration_id = "2b6cd4f1-36d6-4f1a-b188-420c1c76d9d0"
 ds_account_id = False
 webhook_path = "/webhook"
+
+def openFile(filename):
+    pdfFileObj = open(filename, 'rb')
+    return PyPDF2.PdfFileReader(pdfFileObj)
+
+def extractTextFromPage(readerObject,pageNumber):
+    pageObj = readerObject.getPage(pageNumber)
+    return pageObj.extractText()
+
+def entirePdfToText(pdfReaderObject):
+    entireText = ""
+    currentPage = 0 
+    while currentPage < pdfReaderObject.numPages:
+        entireText += '\n' + extractTextFromPage(pdfReaderObject,currentPage)
+        currentPage += 1
+    return entireText
+
 
 @app.route('/')
 @app.route('/index')
@@ -90,8 +109,37 @@ def list_all_unread():
 					if d['documentId'] != 'certificate':
 						final_documents.append(d)
 
-				response = {"fulfillment": "There are " + str(len(final_documents)) + " documents to read"}
+				response = {"fulfillmentText": "There are " + str(len(final_documents)) + " documents to read"}
 				break
+
+	elif action_conditions == 'read.text':
+		index_of_document = request_json['queryResult']['parameters']['number']
+		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		# print api_response.text
+		response_text = json.loads(api_response.text)
+		print response_text, 'ddddddddddddddddddddddddd'
+		pending_envelops = response_text[u'folderItems']
+		pending_envelop_senders = [x["senderName"] for x in pending_envelops]
+		envelop_ids = [x["envelopeId"] for x in pending_envelops]
+		fulfillmentText = ""
+		for i, sender in enumerate(pending_envelop_senders):
+			if person_name in sender:
+				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
+				print new_api_response
+				documents = new_api_response['envelopeDocuments']
+				doc_to_consider = [x for x in documents if x['order']==index_of_document][0]		
+				pdf_file = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents/"+doc_to_consider['order'], headers=ds_recipe_lib.ds_headers)
+				with open('pdf_file.pdf', 'wb') as f:
+					f.write(pdf_file.content)
+
+				pdfReaderObject = openFile("pdf_file.pdf")
+				resumeText = entirePdfToText(pdfReaderObject)
+				summary = summarize(resumeText, word_count=100, split=False)
+				summary = summary.replace("\n", " ")
+				response = {"fulfillmentText": summary}
+	else:
+		response = {}
 
 	print response, 'ssssssssssssssssssssssssssssssssssss'
 	response = app.response_class(
