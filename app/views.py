@@ -9,7 +9,6 @@ from lib_master_python import ds_recipe_lib
 import py_010_webhook_lib
 import PyPDF2
 from gensim.summarization.summarizer import summarize
-from xml.etree import ElementTree
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 
