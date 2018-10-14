@@ -4,7 +4,15 @@ import os.path
 import requests
 import json
 from flask.ext.autoindex import AutoIndex
+from lib_master_python import ds_recipe_lib
 import py_010_webhook_lib
+
+
+ds_user_email = "tvdesai@eng.ucsd.edu"
+ds_user_pw = "abcd@12345"
+ds_integration_id = "2b6cd4f1-36d6-4f1a-b188-420c1c76d9d0"
+ds_account_id = False
+webhook_path = "/webhook"
 
 @app.route('/')
 @app.route('/index')
@@ -30,15 +38,28 @@ def autoindex(path):
 
 @app.route('/list_all_unread')
 def list_all_unread():
-	api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/6807342/search_folders/awaiting_my_signature?order=desc")
-	print json.loads(api_response.text)
-	pending_envelops = api_response.folderItems
-	pending_envelop_subjects = [x["subject"] for x in pending_envelopes]
-	pending_envelop_senders = [x["senderName"] for x in pending_envelopes]
-	response = {"num_envelops":len(pending_envelopes), "pending_envelops_subjects":pending_envelops_subjects, "pending_envelop_sender":pending_envelop_senders}
+	global ds_account_id
+	msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
+	if (msg != None):
+		return {'ok': False, 'msg': msg}
 
+	r = ds_recipe_lib.login()
+	if (not r["ok"]):
+		return r
+	else:
+		print 'login successful'
+
+	ds_account_id = ds_recipe_lib.ds_account_id
+	api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/6807342/search_folders/action_required?order=desc", headers=ds_recipe_lib.ds_headers)
+	# print api_response.text
+	response_text = json.loads(api_response.text)
+	pending_envelops = response_text[u'folderItems']
+	pending_envelop_subjects = [x["subject"] for x in pending_envelops]
+	pending_envelop_senders = [x["senderName"] for x in pending_envelops]
+	response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
+
+	print response
 	return response
-
 
 # @app.route('/read_document')
 # def read_document(envelope_name):
