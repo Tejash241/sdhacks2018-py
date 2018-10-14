@@ -38,7 +38,8 @@ def autoindex(path):
 
 @app.route('/list_all_unread', methods=['POST'])
 def list_all_unread():
-	print request.json
+	request_json = request.json
+	print request_json
 	global ds_account_id
 	msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
 	if (msg != None):
@@ -51,22 +52,46 @@ def list_all_unread():
 		print 'login successful'
 
 	ds_account_id = ds_recipe_lib.ds_account_id
-	api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
-	# print api_response.text
-	response_text = json.loads(api_response.text)
-	print response_text
-	pending_envelops = response_text[u'folderItems']
-	pending_envelop_subjects = [x["subject"] for x in pending_envelops]
-	pending_envelop_senders = [x["senderName"] for x in pending_envelops]
-	response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
-	fulfillmentText = ""
-	for i, sender in enumerate(pending_envelop_senders):
-		if i == 0:
-			fulfillmentText += "You have one email from " + sender.split()[0]
-		else:
-			fulfillmentText += "one email from " + sender.split()[0]
+	action_conditions = request_json['queryResult']['action']
+	if action_conditions == 'email.ask': 
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		# print api_response.text
+		response_text = json.loads(api_response.text)
+		print response_text
+		pending_envelops = response_text[u'folderItems']
+		pending_envelop_senders = [x["senderName"] for x in pending_envelops]
+		fulfillmentText = ""
+		for i, sender in enumerate(pending_envelop_senders):
+			if i == 0:
+				fulfillmentText += "You have one email from " + sender.split()[0]
+			else:
+				fulfillmentText += "one email from " + sender.split()[0]
 
-	response = {"fulfillmentText":fulfillmentText}
+		response = {"fulfillmentText":fulfillmentText}
+
+
+	elif action_conditions == 'email.from': #read document of a particular person
+		person_name = request_json['queryResult']['parameters']['Name'] #some name to be inputted from Nitesh
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		# print api_response.text
+		response_text = json.loads(api_response.text)
+		print response_text, 'ddddddddddddddddddddddddd'
+		pending_envelops = response_text[u'folderItems']
+		pending_envelop_senders = [x["senderName"] for x in pending_envelops]
+		envelop_ids = [x["envelopeId"] for x in pending_envelops]
+		fulfillmentText = ""
+		for i, sender in enumerate(pending_envelop_senders):
+			if person_name in sender:
+				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
+				print new_api_response
+				documents = new_api_response['envelopeDocuments']
+				final_documents = []
+				for d in documents:
+					if d['documentId'] != 'certificate':
+						final_documents.append(d)
+
+				response = {"fulfillment": "There are " + str(len(final_documents)) + " documents to read"}
+				break
 
 	print response, 'sdsddddddddddddddddddddddddddd'
 	response = app.response_class(
