@@ -113,7 +113,7 @@ def list_all_unread():
 				break
 
 	elif action_conditions == 'read.text':
-		index_of_document = str(request_json['queryResult']['parameters']['number'])
+		index_of_document = str(int(request_json['queryResult']['parameters']['number']))
 		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
 		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
