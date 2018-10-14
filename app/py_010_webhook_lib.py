@@ -93,6 +93,7 @@ def send():
     
     signers = [{"email": ds_signer1_email,
                 "name": ds_signer1_name,
+                "clientUserId": "123",
                 "recipientId": "1",
                 "routingOrder": "1",
                 "tabs": nda_fields()}]

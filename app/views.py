@@ -73,7 +73,7 @@ def list_all_unread():
 	ds_account_id = ds_recipe_lib.ds_account_id
 	action_conditions = request_json['queryResult']['action']
 	if action_conditions == 'email.ask': 
-		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_my_signature?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
 		response_text = json.loads(api_response.text)
 		print response_text
@@ -82,16 +82,16 @@ def list_all_unread():
 		fulfillmentText = ""
 		for i, sender in enumerate(pending_envelop_senders):
 			if i == 0:
-				fulfillmentText += "You have one email from " + sender.split()[0]
+				fulfillmentText += "You have one email from " + sender.split()[0] + " "
 			else:
-				fulfillmentText += "one email from " + sender.split()[0]
+				fulfillmentText += "one email from " + sender.split()[0] + " "
 
 		response = {"fulfillmentText":fulfillmentText}
 
 
 	elif action_conditions == 'email.from': #read document of a particular person
 		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
-		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_my_signature?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
 		response_text = json.loads(api_response.text)
 		print response_text, 'ddddddddddddddddddddddddd'
@@ -115,7 +115,7 @@ def list_all_unread():
 	elif action_conditions == 'read.text':
 		index_of_document = str(int(request_json['queryResult']['parameters']['number']))
 		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
-		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_my_signature?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
 		response_text = json.loads(api_response.text)
 		print response_text, 'ddddddddddddddddddddddddd'
@@ -138,6 +138,28 @@ def list_all_unread():
 				summary = summarize(resumeText, word_count=100, split=False)
 				summary = summary.replace("\n", " ")
 				response = {"fulfillmentText": summary}
+	
+	elif action_conditions == '':
+		index_of_document = str(int(request_json['queryResult']['parameters']['number']))
+		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_signature?order=desc", headers=ds_recipe_lib.ds_headers)
+		# print api_response.text
+		response_text = json.loads(api_response.text)
+		print response_text, 'ddddddddddddddddddddddddd'
+		pending_envelops = response_text[u'folderItems']
+		pending_envelop_senders = [x["senderName"] for x in pending_envelops]
+		envelop_ids = [x["envelopeId"] for x in pending_envelops]
+		fulfillmentText = ""
+		for i, sender in enumerate(pending_envelop_senders):
+			if person_name in sender:
+				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
+				print new_api_response
+				documents = new_api_response['envelopeDocuments']
+				doc_to_consider = [x for x in documents if x['order']==index_of_document][0]		
+
+
+
+
 	else:
 		response = {}
 
