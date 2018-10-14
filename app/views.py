@@ -71,7 +71,7 @@ def list_all_unread():
 
 
 	elif action_conditions == 'email.from': #read document of a particular person
-		person_name = request_json['queryResult']['parameters']['Name'] #some name to be inputted from Nitesh
+		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
 		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
 		response_text = json.loads(api_response.text)
@@ -81,7 +81,7 @@ def list_all_unread():
 		envelop_ids = [x["envelopeId"] for x in pending_envelops]
 		fulfillmentText = ""
 		for i, sender in enumerate(pending_envelop_senders):
-			if person_name in sender:
+			if person_name in sender.split():
 				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
 				print new_api_response
 				documents = new_api_response['envelopeDocuments']
