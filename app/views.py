@@ -37,7 +37,8 @@ def autoindex(path):
     return files_index.render_autoindex(path)
 
 @app.route('/list_all_unread', methods=['POST'])
-def list_all_unread():
+def list_all_unread(request):
+	print json.loads(request)
 	global ds_account_id
 	msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
 	if (msg != None):
