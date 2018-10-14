@@ -169,7 +169,7 @@ def list_all_unread():
 
 				options = Options()
 				options.add_argument("--headless")
-				driver = webdriver.Firefox(firefox_options=options, executable_path=os.getcwd()+"/geckodriver")
+				driver = webdriver.Firefox(firefox_options=options, executable_path=os.path.dirname(os.getcwd())+"/geckodriver")
 				driver.get(response_url)
 				time.sleep(10)
 				driver.find_element_by_id('action-bar-btn-continue').click()
