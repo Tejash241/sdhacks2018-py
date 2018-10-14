@@ -81,7 +81,7 @@ def list_all_unread():
 		envelop_ids = [x["envelopeId"] for x in pending_envelops]
 		fulfillmentText = ""
 		for i, sender in enumerate(pending_envelop_senders):
-			if person_name in sender.split():
+			if person_name in sender:
 				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
 				print new_api_response
 				documents = new_api_response['envelopeDocuments']
@@ -93,7 +93,7 @@ def list_all_unread():
 				response = {"fulfillment": "There are " + str(len(final_documents)) + " documents to read"}
 				break
 
-	print response, 'sdsddddddddddddddddddddddddddd'
+	print response, 'ssssssssssssssssssssssssssssssssssss'
 	response = app.response_class(
         response=json.dumps(response),
         status=200,
