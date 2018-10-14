@@ -26,6 +26,12 @@ files_index = AutoIndex(app, os.path.curdir + '/app/files/', add_url_rules=False
 def autoindex(path):
     return files_index.render_autoindex(path)
 
+
+@app.route('/receive')
+def received():
+	py_010_webhook_lib.webhook_listener()
+	return render_template('sent.html', title='Received - Webhook--Python', data=None)
+
 ################################################################################
 ################################################################################
 
