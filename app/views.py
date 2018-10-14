@@ -1,6 +1,7 @@
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g, jsonify
 from app import app
 import os.path
+import requests
 from flask.ext.autoindex import AutoIndex
 import py_010_webhook_lib
 
@@ -35,6 +36,12 @@ def list_all_unread():
 	response = {"num_envelops":len(pending_envelopes), "pending_envelops_subjects":pending_envelops_subjects, "pending_envelop_sender":pending_envelop_senders}
 
 	return response
+
+
+# @app.route('/read_document')
+# def read_document(envelope_name):
+# 	api_response = ...
+# 	pass
 
 ################################################################################
 ################################################################################
