@@ -36,7 +36,7 @@ files_index = AutoIndex(app, os.path.curdir + '/app/files/', add_url_rules=False
 def autoindex(path):
     return files_index.render_autoindex(path)
 
-@app.route('/list_all_unread')
+@app.route('/list_all_unread', methods=['POST'])
 def list_all_unread():
 	global ds_account_id
 	msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
