@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g, jsonify
 from app import app
 import os.path
-import requests
+# import requests
 from flask.ext.autoindex import AutoIndex
 import py_010_webhook_lib
 
@@ -27,15 +27,15 @@ files_index = AutoIndex(app, os.path.curdir + '/app/files/', add_url_rules=False
 def autoindex(path):
     return files_index.render_autoindex(path)
 
-@app.route('/list_all_unread')
-def list_all_unread():
-	api_response = requests.GET("https://demo.docusign.net/restapi/v2/accounts/6807342/search_folders/awaiting_my_signature?order=desc")
-	pending_envelops = api_response["folderItems"]
-	pending_envelop_subjects = [x["subject"] for x in pending_envelopes]
-	pending_envelop_senders = [x["senderName"] for x in pending_envelopes]
-	response = {"num_envelops":len(pending_envelopes), "pending_envelops_subjects":pending_envelops_subjects, "pending_envelop_sender":pending_envelop_senders}
+# @app.route('/list_all_unread')
+# def list_all_unread():
+# 	api_response = requests.GET("https://demo.docusign.net/restapi/v2/accounts/6807342/search_folders/awaiting_my_signature?order=desc")
+# 	pending_envelops = api_response["folderItems"]
+# 	pending_envelop_subjects = [x["subject"] for x in pending_envelopes]
+# 	pending_envelop_senders = [x["senderName"] for x in pending_envelopes]
+# 	response = {"num_envelops":len(pending_envelopes), "pending_envelops_subjects":pending_envelops_subjects, "pending_envelop_sender":pending_envelop_senders}
 
-	return response
+# 	return response
 
 
 # @app.route('/read_document')
