@@ -37,8 +37,8 @@ def autoindex(path):
     return files_index.render_autoindex(path)
 
 @app.route('/list_all_unread', methods=['POST'])
-def list_all_unread(request):
-	print json.loads(request)
+def list_all_unread():
+	print request.json
 	global ds_account_id
 	msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
 	if (msg != None):
@@ -51,9 +51,10 @@ def list_all_unread(request):
 		print 'login successful'
 
 	ds_account_id = ds_recipe_lib.ds_account_id
-	api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/6807342/search_folders/action_required?order=desc", headers=ds_recipe_lib.ds_headers)
+	api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/completed?order=desc", headers=ds_recipe_lib.ds_headers)
 	# print api_response.text
 	response_text = json.loads(api_response.text)
+	print response_text
 	pending_envelops = response_text[u'folderItems']
 	pending_envelop_subjects = [x["subject"] for x in pending_envelops]
 	pending_envelop_senders = [x["senderName"] for x in pending_envelops]
