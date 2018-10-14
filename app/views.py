@@ -58,8 +58,15 @@ def list_all_unread():
 	pending_envelops = response_text[u'folderItems']
 	pending_envelop_subjects = [x["subject"] for x in pending_envelops]
 	pending_envelop_senders = [x["senderName"] for x in pending_envelops]
-	# response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
-	response = {"fulfillmentText":"hello"}
+	response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
+	fulfillmentText = ""
+	for i, sender in enumerate(pending_envelop_senders):
+		if i == 0:
+			fulfillmentText += "You have one email from " + sender.split(0)
+		else:
+			fulfillmentText += "one email from " + sender.split(0)
+
+	response = {"fulfillmentText":fulfillmentText}
 
 	print response
 	response = app.response_class(
