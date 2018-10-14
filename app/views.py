@@ -58,10 +58,17 @@ def list_all_unread():
 	pending_envelops = response_text[u'folderItems']
 	pending_envelop_subjects = [x["subject"] for x in pending_envelops]
 	pending_envelop_senders = [x["senderName"] for x in pending_envelops]
-	response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
+	# response = {"num_envelops":len(pending_envelops), "pending_envelops_subjects":pending_envelop_subjects, "pending_envelop_sender":pending_envelop_senders}
+	response = {"fulfillmentText":"hello"}
 
 	print response
+	response = app.response_class(
+        response=json.dumps(response),
+        status=200,
+        mimetype='application/json'
+    )
 	return response
+
 
 # @app.route('/read_document')
 # def read_document(envelope_name):
