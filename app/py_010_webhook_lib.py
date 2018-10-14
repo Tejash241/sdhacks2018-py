@@ -15,9 +15,9 @@ from bs4 import BeautifulSoup
 # Enter your info here
 # Or set environment variables DS_USER_EMAIL, DS_USER_PW, and DS_INTEGRATION_ID
 # Globals:
-ds_user_email = "***"
-ds_user_pw = "***"
-ds_integration_id = "***"
+ds_user_email = "tvdesai@eng.ucsd.edu"
+ds_user_pw = "abcd@12345"
+ds_integration_id = "2b6cd4f1-36d6-4f1a-b188-420c1c76d9d0"
 ds_account_id = False
 doc_document_path = "app/static/sample_documents_master/NDA.pdf"
 doc_document_name = "NDA.pdf"

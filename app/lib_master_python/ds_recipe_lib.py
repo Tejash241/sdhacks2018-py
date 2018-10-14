@@ -11,9 +11,9 @@ from flask import request
 
 # Set environment variables DS_USER_EMAIL, DS_USER_PW, and DS_INTEGRATION_ID
 # Globals variables
-ds_user_email = "" 
-ds_user_pw = "" 
-ds_integration_id = ""
+ds_user_email = "tvdesai@eng.ucsd.edu"
+ds_user_pw = "abcd@12345"
+ds_integration_id = "2b6cd4f1-36d6-4f1a-b188-420c1c76d9d0"
 ds_account_id = ""
 ds_base_url = ""
 ds_headers = ""
@@ -78,11 +78,12 @@ def login():
     try:
         r = requests.get(ds_api_login_url, headers=ds_headers)
     except requests.exceptions.RequestException as e:
-        return ({'ok': false, 'msg': "Error calling DocuSign login: " + e})
+        return ({'ok': False, 'msg': "Error calling DocuSign login: " + e})
         
     status = r.status_code
     if (status != 200): 
-        return ({'ok': false, 'msg': "Error calling DocuSign login, status is: " + str(status)})
+        print str(status)
+        return ({'ok': False, 'msg': "Error calling DocuSign login, status is: " + str(status)})
 
     # get the baseUrl and accountId from the response body
     response = r.json()
