@@ -62,9 +62,9 @@ def list_all_unread():
 	fulfillmentText = ""
 	for i, sender in enumerate(pending_envelop_senders):
 		if i == 0:
-			fulfillmentText += "You have one email from " + sender.split(0)
+			fulfillmentText += "You have one email from " + sender.split()[0]
 		else:
-			fulfillmentText += "one email from " + sender.split(0)
+			fulfillmentText += "one email from " + sender.split()[0]
 
 	response = {"fulfillmentText":fulfillmentText}
 
