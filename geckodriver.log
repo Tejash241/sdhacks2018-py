@@ -1,0 +1,148 @@
+1539535049590	geckodriver	INFO	geckodriver 0.18.0
+1539535049593	geckodriver	INFO	Listening on 127.0.0.1:47699
+1539535050725	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535054330	Marionette	INFO	Listening on port 44011
+1539535054338	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535054381	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535054385	Marionette	DEBUG	[2147483649] Frame script registered
+1539535080910	geckodriver	INFO	geckodriver 0.18.0
+1539535080920	geckodriver	INFO	Listening on 127.0.0.1:35915
+1539535082004	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535085285	Marionette	INFO	Listening on port 35029
+1539535085321	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535085358	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535085383	Marionette	DEBUG	[2147483649] Frame script registered
+1539535085412	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535086723	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535086911	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=cf271e5b-135b-4a21-b906-5e1f21673590&AspxAutoDetectCookieSupport=1
+1539535086917	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=cf271e5b-135b-4a21-b906-5e1f21673590&AspxAutoDetectCookieSupport=1
+1539535086983	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=cf271e5b-135b-4a21-b906-5e1f21673590&AspxAutoDetectCookieSupport=1
+1539535108569	geckodriver	INFO	geckodriver 0.18.0
+1539535108578	geckodriver	INFO	Listening on 127.0.0.1:44907
+1539535109695	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535112856	Marionette	INFO	Listening on port 37999
+1539535112910	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535112945	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535112946	Marionette	DEBUG	[2147483649] Frame script registered
+1539535112971	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535118404	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535118947	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=1fbd9090-c870-4893-8811-5a181374bcd4&AspxAutoDetectCookieSupport=1
+1539535118954	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=1fbd9090-c870-4893-8811-5a181374bcd4&AspxAutoDetectCookieSupport=1
+1539535118957	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=1fbd9090-c870-4893-8811-5a181374bcd4&AspxAutoDetectCookieSupport=1
+1539535129683	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535197775	geckodriver	INFO	geckodriver 0.18.0
+1539535197777	geckodriver	INFO	Listening on 127.0.0.1:35443
+1539535198862	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535202133	Marionette	INFO	Listening on port 41819
+1539535202173	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535202209	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535202221	Marionette	DEBUG	[2147483649] Frame script registered
+1539535202252	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535204521	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535204793	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=a90b6c54-3972-4b7a-9d3b-5f50eaadcfbb&AspxAutoDetectCookieSupport=1
+1539535204809	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=a90b6c54-3972-4b7a-9d3b-5f50eaadcfbb&AspxAutoDetectCookieSupport=1
+1539535204818	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=a90b6c54-3972-4b7a-9d3b-5f50eaadcfbb&AspxAutoDetectCookieSupport=1
+1539535215612	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535222490	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1539535390189	geckodriver	INFO	geckodriver 0.18.0
+1539535390199	geckodriver	INFO	Listening on 127.0.0.1:60763
+1539535391541	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535397274	Marionette	INFO	Listening on port 33535
+1539535397389	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535397550	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535397561	Marionette	DEBUG	[2147483649] Frame script registered
+1539535397600	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535398294	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535398596	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=1a7d7d2d-4d9e-4ca2-936b-74466e2e237a&AspxAutoDetectCookieSupport=1
+1539535398612	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=1a7d7d2d-4d9e-4ca2-936b-74466e2e237a&AspxAutoDetectCookieSupport=1
+1539535398621	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=1a7d7d2d-4d9e-4ca2-936b-74466e2e237a&AspxAutoDetectCookieSupport=1
+1539535409404	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535441190	geckodriver	INFO	geckodriver 0.18.0
+1539535441200	geckodriver	INFO	Listening on 127.0.0.1:56903
+1539535442537	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1539535449008	Marionette	INFO	Listening on port 34249
+1539535449087	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535449273	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535449280	Marionette	DEBUG	[2147483649] Frame script registered
+1539535449350	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535450112	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535450381	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=8be48e6d-b87e-4a99-9ab0-d4b9ac4d0a53&AspxAutoDetectCookieSupport=1
+1539535450398	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=8be48e6d-b87e-4a99-9ab0-d4b9ac4d0a53&AspxAutoDetectCookieSupport=1
+1539535450407	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=8be48e6d-b87e-4a99-9ab0-d4b9ac4d0a53&AspxAutoDetectCookieSupport=1
+1539535460901	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535461454	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535511002	Marionette	INFO	Stopped listening on port 34249
+1539535548974	geckodriver	INFO	geckodriver 0.18.0
+1539535548985	geckodriver	INFO	Listening on 127.0.0.1:55385
+1539535550325	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette", "--headless"]
+*** You are running in headless mode.
+1539535555922	Marionette	INFO	Listening on port 33819
+1539535556002	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535556190	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535556211	Marionette	DEBUG	[2147483649] Frame script registered
+1539535556248	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535556916	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535557184	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=4c14ba74-17b1-49b2-bee8-64a702518ffb&AspxAutoDetectCookieSupport=1
+1539535557200	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=4c14ba74-17b1-49b2-bee8-64a702518ffb&AspxAutoDetectCookieSupport=1
+1539535557209	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=4c14ba74-17b1-49b2-bee8-64a702518ffb&AspxAutoDetectCookieSupport=1
+1539535568005	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535592641	geckodriver	INFO	geckodriver 0.18.0
+1539535592653	geckodriver	INFO	Listening on 127.0.0.1:42085
+1539535593986	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1539535600237	Marionette	INFO	Listening on port 38235
+1539535600355	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535600512	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535600553	Marionette	DEBUG	[2147483649] Frame script registered
+1539535600603	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535601484	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535601747	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=5d856592-9cb3-489b-904c-e145012d249c&AspxAutoDetectCookieSupport=1
+1539535601764	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=5d856592-9cb3-489b-904c-e145012d249c&AspxAutoDetectCookieSupport=1
+1539535601774	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=5d856592-9cb3-489b-904c-e145012d249c&AspxAutoDetectCookieSupport=1
+1539535612859	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+[Parent 1541, Gecko_IOThread] WARNING: pipe error (45): Connection reset by peer: file /build/firefox-E5azaL/firefox-62.0.3+build1/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1539535665121	Marionette	INFO	Stopped listening on port 38235
+1539535690229	geckodriver	INFO	geckodriver 0.18.0
+1539535690239	geckodriver	INFO	Listening on 127.0.0.1:33151
+1539535691578	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1539535697769	Marionette	INFO	Listening on port 44831
+1539535697849	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535698010	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535698013	Marionette	DEBUG	[2147483649] Frame script registered
+1539535698061	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535699048	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535700240	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=15b7f7af-2af9-4d4f-a276-c10f91e2af70&AspxAutoDetectCookieSupport=1
+1539535700256	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=15b7f7af-2af9-4d4f-a276-c10f91e2af70&AspxAutoDetectCookieSupport=1
+1539535700265	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=15b7f7af-2af9-4d4f-a276-c10f91e2af70&AspxAutoDetectCookieSupport=1
+1539535710761	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535711353	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535746839	Marionette	INFO	Stopped listening on port 44831
+1539535757918	geckodriver	INFO	geckodriver 0.18.0
+1539535757928	geckodriver	INFO	Listening on 127.0.0.1:45801
+1539535759260	geckodriver::marionette	INFO	Starting browser /usr/bin/firefox with args ["-marionette"]
+1539535765358	Marionette	INFO	Listening on port 45199
+1539535765404	Marionette	WARN	TLS certificate errors will be ignored for this session
+1539535765553	Marionette	DEBUG	[2147483649] Frame script loaded
+1539535765562	Marionette	DEBUG	[2147483649] Frame script registered
+1539535765635	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1539535766377	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+JavaScript warning: https://demo.docusign.net/Signing/client_scripts/jQuery/jquery-1.9.1.min.js, line 1: Using //@ to indicate sourceMappingURL pragmas is deprecated. Use //# instead
+1539535766662	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for https://demo.docusign.net/Signing/StartInSession.aspx?t=9577d494-7caf-4231-94f3-6080df7e1087&AspxAutoDetectCookieSupport=1
+1539535766679	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for https://demo.docusign.net/Signing/StartInSession.aspx?t=9577d494-7caf-4231-94f3-6080df7e1087&AspxAutoDetectCookieSupport=1
+1539535766690	Marionette	DEBUG	[2147483649] Received DOM event pageshow for https://demo.docusign.net/Signing/StartInSession.aspx?t=9577d494-7caf-4231-94f3-6080df7e1087&AspxAutoDetectCookieSupport=1
+1539535778221	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535778963	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535779295	Marionette	DEBUG	[2147483649] Canceled page load listener because no navigation has been detected
+1539535779632	Marionette	INFO	Stopped listening on port 45199

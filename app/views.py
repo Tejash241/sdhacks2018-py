@@ -1,14 +1,17 @@
 from flask import Flask, render_template, flash, redirect, session, url_for, request, g, jsonify
 from app import app
-import os.path
+import os.path, os
 import requests
 import json
+import time
 from flask.ext.autoindex import AutoIndex
 from lib_master_python import ds_recipe_lib
 import py_010_webhook_lib
 import PyPDF2
 from gensim.summarization.summarizer import summarize
 from xml.etree import ElementTree
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
 
 ds_user_email = "tvdesai@eng.ucsd.edu"
 ds_user_pw = "abcd@12345"
@@ -139,10 +142,10 @@ def list_all_unread():
 				summary = summary.replace("\n", " ")
 				response = {"fulfillmentText": summary}
 	
-	elif action_conditions == '':
+	elif action_conditions == 'agreed':
 		index_of_document = str(int(request_json['queryResult']['parameters']['number']))
 		person_name = request_json['queryResult']['parameters']['name'] #some name to be inputted from Nitesh
-		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_signature?order=desc", headers=ds_recipe_lib.ds_headers)
+		api_response = requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/search_folders/awaiting_my_signature?order=desc", headers=ds_recipe_lib.ds_headers)
 		# print api_response.text
 		response_text = json.loads(api_response.text)
 		print response_text, 'ddddddddddddddddddddddddd'
@@ -155,10 +158,26 @@ def list_all_unread():
 				new_api_response = json.loads(requests.get("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelop_ids[i]+"/documents", headers=ds_recipe_lib.ds_headers).text)
 				print new_api_response
 				documents = new_api_response['envelopeDocuments']
-				doc_to_consider = [x for x in documents if x['order']==index_of_document][0]		
+				doc_to_consider = [x for x in documents if x['order']==index_of_document][0]
+				envelope_created_resp = py_010_webhook_lib.create_envelope()
+				print envelope_created_resp
+				final_req_data = {"userName":envelope_created_resp["ds_signer1_name"], "email":envelope_created_resp["ds_signer1_email"],    "recipientId": "1","clientUserId": "1234","authenticationMethod": "email","returnUrl": "https://www.docusign.com/devcenter"}
 
+				response = requests.post("https://demo.docusign.net/restapi/v2/accounts/"+ds_account_id+"/envelopes/"+envelope_created_resp["envelope_id"]+"/views/recipient", headers=ds_recipe_lib.ds_headers, json=final_req_data).text
 
+				print response, 'FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+				response_url = json.loads(response)['url']
 
+				options = Options()
+				options.add_argument("--headless")
+				driver = webdriver.Firefox(firefox_options=options, executable_path="/home/tejash/SDHacks2018/sdhacks2018-py/geckodriver")
+				driver.get(response_url)
+				time.sleep(10)
+				driver.find_element_by_id('action-bar-btn-continue').click()
+				driver.find_element_by_class_name('signature-tab-content').click()
+				driver.find_element_by_id('action-bar-btn-finish').click()
+				driver.quit()
+				response = {}
 
 	else:
 		response = {}

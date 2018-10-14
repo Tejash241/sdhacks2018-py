@@ -14,7 +14,7 @@ from bs4 import BeautifulSoup
 
 # Enter your info here
 # Or set environment variables DS_USER_EMAIL, DS_USER_PW, and DS_INTEGRATION_ID
-# Globals:
+    # Globals:
 ds_user_email = "tvdesai@eng.ucsd.edu"
 ds_user_pw = "abcd@12345"
 ds_integration_id = "2b6cd4f1-36d6-4f1a-b188-420c1c76d9d0"
@@ -93,7 +93,6 @@ def send():
     
     signers = [{"email": ds_signer1_email,
                 "name": ds_signer1_name,
-                "clientUserId": "123",
                 "recipientId": "1",
                 "routingOrder": "1",
                 "tabs": nda_fields()}]
@@ -166,6 +165,109 @@ def send():
 
 ########################################################################
 ########################################################################
+def create_envelope():
+    global ds_account_id, ds_signer1_email, ds_signer1_name, ds_cc1_email, ds_cc1_name
+    msg = ds_recipe_lib.init(ds_user_email, ds_user_pw, ds_integration_id, ds_account_id)
+    if (msg != None):
+        return {'ok': False, 'msg': msg}
+
+    # Ready...
+    # Possible create some fake people
+    ds_signer1_email = "abcd@mailinator.com" #ds_recipe_lib.get_signer_email(ds_signer1_email)
+    ds_signer1_name = ds_recipe_lib.get_signer_name(ds_signer1_name)
+    ds_cc1_email = ds_recipe_lib.get_signer_email(ds_cc1_email)
+    ds_cc1_name = ds_recipe_lib.get_signer_name(ds_cc1_name)
+
+    # STEP 1 - Login
+    r = ds_recipe_lib.login()
+    if (not r["ok"]):
+        return r
+    ds_account_id = ds_recipe_lib.ds_account_id    
+
+    #
+    # STEP 2 - Create and send envelope with eventNotification
+    #
+    webhook_url = ds_recipe_lib.get_base_url() + webhook_path
+    event_notification = {"url": webhook_url,
+        "loggingEnabled": "true", # The api wants strings for true/false
+        "requireAcknowledgment": "true",
+        "useSoapInterface": "false",
+        "includeCertificateWithSoap": "false",
+        "signMessageWithX509Cert": "false",
+        "includeDocuments": "true",
+        "includeEnvelopeVoidReason": "true",
+        "includeTimeZone": "true",
+        "includeSenderAccountAsCustomField": "true",
+        "includeDocumentFields": "true",
+        "includeCertificateOfCompletion": "true",
+        "envelopeEvents": [ # for this recipe, we're requesting notifications
+            # for all envelope and recipient events
+            {"envelopeEventStatusCode": "sent"},
+              {"envelopeEventStatusCode": "delivered"},
+              {"envelopeEventStatusCode": "completed"},
+            {"envelopeEventStatusCode": "declined"},
+            {"envelopeEventStatusCode": "voided"}],
+        "recipientEvents": [
+            {"recipientEventStatusCode": "Sent"},
+            {"recipientEventStatusCode": "Delivered"},
+            {"recipientEventStatusCode": "Completed"},
+            {"recipientEventStatusCode": "Declined"},
+            {"recipientEventStatusCode": "AuthenticationFailed"},
+            {"recipientEventStatusCode": "AutoResponded"}]
+    }
+
+    # construct the body of the request
+    file_contents = open(doc_document_path, "rb").read()
+
+    # Our goal: provide an email subject that is most meaningful to the recipients
+    # The regex strips the 3 or 4 character extension from the filename.
+    subject = "Please sign the " + re.sub('/\\.[^.\\s]{3,4}$/', '', doc_document_name) + " document"
+    # File contents provided here instead of a multi-part request
+    docs = [{"documentId": "1", 
+            "name": doc_document_name,
+            "documentBase64": base64.b64encode(file_contents)}]
+    
+    signers = [{"email": ds_signer1_email,
+                "name": ds_signer1_name,
+                "recipientId": "1",
+                "clientUserId":"1234",
+                "routingOrder": "1",
+                "tabs": nda_fields()}]
+    
+    data = {"emailSubject": subject,
+            "documents": docs, 
+            "recipients": {"signers": signers},
+            "eventNotification": event_notification,
+            "status": "sent"
+    }
+        
+    # append "/envelopes" to the baseUrl and use in the request
+    url = ds_recipe_lib.ds_base_url + "/envelopes"
+    try:
+        r = requests.post(url, headers=ds_recipe_lib.ds_headers, json=data)
+    except requests.exceptions.RequestException as e:
+        return {'ok': False, 'msg': "Error calling Envelopes:create: " + str(e)}
+        
+    status = r.status_code
+    if (status != 201): 
+        return ({'ok': False, 'msg': "Error calling DocuSign Envelopes:create, status is: " + str(status)})
+
+    data = r.json()
+    envelope_id = data['envelopeId']
+    setup_output_dir(envelope_id)
+    
+    ds_signer1_email_access = ds_recipe_lib.get_temp_email_access(ds_signer1_email)
+    return {"ok": True,
+        "envelope_id": envelope_id,
+        "ds_signer1_email": ds_signer1_email,
+        "ds_signer1_name": ds_signer1_name,
+        "ds_signer1_access": ds_signer1_email_access,
+        "ds_signer1_qr": ds_signer1_email,
+        "ds_cc1_email": ds_cc1_email,
+        "ds_cc1_name": ds_cc1_name,
+        "webhook_url": webhook_url
+    }
+
 
 def    setup_output_dir(envelope_id):
 # setup output dir for the envelope
