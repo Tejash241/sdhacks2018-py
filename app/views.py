@@ -30,7 +30,7 @@ def autoindex(path):
 @app.route('/receive')
 def received():
 	py_010_webhook_lib.webhook_listener()
-	return render_template('sent.html', title='Received - Webhook--Python', data=None)
+	return render_template('sent.html', title='Received - Webhook--Python', data={"html":"nothing here"})
 
 ################################################################################
 ################################################################################
