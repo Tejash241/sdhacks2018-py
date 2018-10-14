@@ -127,6 +127,7 @@ def send():
     # Instructions for reading the email
     html =  "<h2>Signature request sent!</h2>" + \
             "<p>Envelope ID: " + envelope_id + "</p>" + \
+            "<p>Signer email: " + ds_signer1_email + "</p>" + \
             "<p>Signer: " + ds_signer1_name + "</p>" + \
             "<p>CC: " + ds_cc1_name + "</p>" + \
             "<h2>Next steps</h2>" + \
