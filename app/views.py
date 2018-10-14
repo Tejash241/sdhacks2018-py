@@ -135,7 +135,7 @@ def list_all_unread():
 
 				pdfReaderObject = openFile("pdf_file.pdf")
 				resumeText = entirePdfToText(pdfReaderObject)
-				summary = summarize(resumeText, word_count=100, split=False)
+				summary = summarize(resumeText, ratio=0.2, split=False)
 				summary = summary.replace("\n", " ")
 				response = {"fulfillmentText": summary}
 	
